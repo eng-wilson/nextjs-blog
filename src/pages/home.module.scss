@@ -1,1 +1,71 @@
 // TODO
+.content {
+  h1 {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 34px;
+    /* identical to box height */
+
+    text-align: justify;
+    letter-spacing: -0.5px;
+
+    /* Heading */
+
+    color: #f8f8f8;
+  }
+
+  span {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height */
+
+    margin-top: 8px;
+
+    text-align: justify;
+
+    /* Body */
+
+    color: #d7d7d7;
+  }
+}
+
+.articleInfo {
+  display: flex;
+  flex-direction: row;
+
+  margin-top: 24px;
+
+  div {
+    display: flex;
+    flex-direction: row;
+
+    time,
+    span,
+    svg {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+
+      /* identical to box height */
+
+      /* Info */
+
+      color: #bbbbbb;
+    }
+
+    time,
+    span {
+      padding-left: 8px;
+    }
+  }
+  div:nth-child(2n) {
+    padding-left: 24px;
+  }
+}

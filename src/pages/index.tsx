@@ -1,5 +1,12 @@
+import { ReactElement } from 'react';
 import { GetStaticProps } from 'next';
 
+import { format } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
+
+import { FiCalendar, FiUser } from 'react-icons/fi';
+
+import { PrismicDocument, Query } from '@prismicio/types';
 import { getPrismicClient } from '../services/prismic';
 
 import commonStyles from '../styles/common.module.scss';
@@ -24,13 +31,67 @@ interface HomeProps {
   postsPagination: PostPagination;
 }
 
-// export default function Home() {
-//   // TODO
-// }
+export default function Home({ postsPagination }: HomeProps): ReactElement {
+  return (
+    <main className={styles.container}>
+      {postsPagination.results.map((post: Post) => (
+        <article className={styles.content} key={post.uid}>
+          <h1>{post.data.title}</h1>
+          <span>{post.data.subtitle}</span>
 
-// export const getStaticProps = async () => {
-//   // const prismic = getPrismicClient({});
-//   // const postsResponse = await prismic.getByType(TODO);
+          <div className={styles.articleInfo}>
+            <div>
+              <FiCalendar />
+              <time>{post.first_publication_date}</time>
+            </div>
 
-//   // TODO
-// };
+            <div>
+              <FiUser />
+              <time>{post.data.author}</time>
+            </div>
+          </div>
+        </article>
+      ))}
+    </main>
+  );
+}
+
+export const getStaticProps = async (): Promise<{
+  props: {
+    postsPagination: PostPagination;
+  };
+}> => {
+  const prismic = getPrismicClient({});
+  const postsResponse = await prismic.getByType('posts');
+
+  console.log(postsResponse);
+
+  const postsPagination = {
+    next_page: postsResponse.next_page,
+    results: postsResponse.results.map(post => {
+      return {
+        uid: post.uid,
+        first_publication_date: format(
+          new Date(post.first_publication_date),
+          'dd MMM yyyy',
+          {
+            locale: ptBR,
+          }
+        ),
+        data: {
+          title: post.data.title,
+          subtitle: post.data.subtitle,
+          author: post.data.author,
+        },
+      };
+    }),
+  };
+
+  console.log(postsPagination);
+
+  return {
+    props: {
+      postsPagination,
+    },
+  };
+};
