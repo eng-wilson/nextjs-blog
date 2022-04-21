@@ -37,32 +37,35 @@ export default function Home({ postsPagination }: HomeProps): ReactElement {
   return (
     <main className={styles.container}>
       {postsPagination.results.map((post: Post) => (
-        <Link href={`/post/${post.uid}`}>
-          <a>
-            <article className={styles.content} key={post.uid}>
+        <article className={styles.content} key={post.uid}>
+          <Link href={`/post/${post.uid}`}>
+            <a>
               <h1>{post.data.title}</h1>
-              <span>{post.data.subtitle}</span>
+            </a>
+          </Link>
+          <span>{post.data.subtitle}</span>
+          <div className={styles.articleInfo}>
+            <div>
+              <FiCalendar />
+              <time>
+                {format(new Date(post.first_publication_date), 'dd MMM yyyy', {
+                  locale: ptBR,
+                })}
+              </time>
+            </div>
 
-              <div className={styles.articleInfo}>
-                <div>
-                  <FiCalendar />
-                  <time>{post.first_publication_date}</time>
-                </div>
-
-                <div>
-                  <FiUser />
-                  <time>{post.data.author}</time>
-                </div>
-              </div>
-            </article>
-          </a>
-        </Link>
+            <div>
+              <FiUser />
+              <time>{post.data.author}</time>
+            </div>
+          </div>
+        </article>
       ))}
     </main>
   );
 }
 
-export const getStaticProps = async (): Promise<{
+export const getStaticProps: GetStaticProps = async (): Promise<{
   props: {
     postsPagination: PostPagination;
   };
@@ -70,20 +73,12 @@ export const getStaticProps = async (): Promise<{
   const prismic = getPrismicClient({});
   const postsResponse = await prismic.getByType('posts');
 
-  console.log(postsResponse);
-
   const postsPagination = {
     next_page: postsResponse.next_page,
     results: postsResponse.results.map(post => {
       return {
         uid: post.uid,
-        first_publication_date: format(
-          new Date(post.first_publication_date),
-          'dd MMM yyyy',
-          {
-            locale: ptBR,
-          }
-        ),
+        first_publication_date: post.first_publication_date,
         data: {
           title: post.data.title,
           subtitle: post.data.subtitle,
@@ -92,8 +87,6 @@ export const getStaticProps = async (): Promise<{
       };
     }),
   };
-
-  console.log(postsPagination);
 
   return {
     props: {
