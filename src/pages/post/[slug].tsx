@@ -12,6 +12,7 @@ import { getPrismicClient } from '../../services/prismic';
 
 import commonStyles from '../../styles/common.module.scss';
 import styles from './post.module.scss';
+import Header from '../../components/Header';
 
 interface Post {
   first_publication_date: string | null;
@@ -45,6 +46,8 @@ export default function Post({ post }: PostProps): ReactElement {
   // TODO
   return (
     <main className={styles.container}>
+      <Header />
+
       <article className={styles.post}>
         <img src={post.data.banner.url} alt="" />
 

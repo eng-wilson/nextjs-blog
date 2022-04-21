@@ -2,9 +2,14 @@
   max-width: 720px;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
 
   margin: 0 auto;
+
+  img {
+    height: 100px;
+  }
 }
 
 .post {
