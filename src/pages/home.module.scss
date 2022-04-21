@@ -1,15 +1,36 @@
 .container {
+  max-width: 720px;
+
   display: flex;
+  flex-direction: column;
   justify-content: center;
 
-  width: 100vw;
-  height: 100vh;
+  margin: 0 auto;
 
   padding-top: 4rem;
+
+  button {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height */
+
+    border: 0;
+    cursor: pointer;
+
+    text-align: justify;
+
+    /* Highlight */
+
+    color: #ff57b2;
+  }
 }
 
 .content {
   padding-bottom: 3rem;
+  padding-top: 3rem;
 
   a {
     text-decoration: none;

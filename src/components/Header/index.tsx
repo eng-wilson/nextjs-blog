@@ -3,9 +3,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Logo from '../../../public/logo.svg';
 
+import styles from './header.module.scss';
+
 export default function Header(): ReactElement {
   return (
-    <div>
+    <div className={styles.container}>
       <Link href="/">
         <a>
           <img
