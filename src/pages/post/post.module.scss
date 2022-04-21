@@ -1,1 +1,113 @@
-// TODO
+.container {
+  max-width: 720px;
+
+  display: flex;
+  justify-content: center;
+
+  margin: 0 auto;
+}
+
+.post {
+  img {
+    width: 100%;
+    height: 400px;
+  }
+  h1 {
+    padding-top: 5rem;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 58px;
+    /* identical to box height */
+
+    letter-spacing: -0.5px;
+
+    /* Heading */
+
+    color: #f8f8f8;
+  }
+  h2 {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 140%;
+    /* or 50px */
+
+    padding-bottom: 2rem;
+
+    text-align: justify;
+
+    /* Heading */
+
+    color: #f8f8f8;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+
+  div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+
+    /* Info */
+
+    color: #bbbbbb;
+
+    span,
+    time {
+      padding-left: 0.5rem;
+    }
+  }
+
+  div:nth-child(n + 2) {
+    margin-left: 1.5rem;
+  }
+
+  padding: 1.5rem 0 4rem 0;
+}
+
+.postContent {
+  p,
+  span,
+  ul,
+  li,
+  a {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 140%;
+    /* or 25px */
+
+    text-align: justify;
+
+    /* Body */
+
+    color: #d7d7d7;
+
+    padding-bottom: 1.5rem;
+  }
+
+  a {
+    font-weight: 700;
+
+    // text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

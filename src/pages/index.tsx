@@ -1,6 +1,8 @@
 import { ReactElement } from 'react';
 import { GetStaticProps } from 'next';
 
+import Link from 'next/link';
+
 import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 
@@ -35,22 +37,26 @@ export default function Home({ postsPagination }: HomeProps): ReactElement {
   return (
     <main className={styles.container}>
       {postsPagination.results.map((post: Post) => (
-        <article className={styles.content} key={post.uid}>
-          <h1>{post.data.title}</h1>
-          <span>{post.data.subtitle}</span>
+        <Link href={`/post/${post.uid}`}>
+          <a>
+            <article className={styles.content} key={post.uid}>
+              <h1>{post.data.title}</h1>
+              <span>{post.data.subtitle}</span>
 
-          <div className={styles.articleInfo}>
-            <div>
-              <FiCalendar />
-              <time>{post.first_publication_date}</time>
-            </div>
+              <div className={styles.articleInfo}>
+                <div>
+                  <FiCalendar />
+                  <time>{post.first_publication_date}</time>
+                </div>
 
-            <div>
-              <FiUser />
-              <time>{post.data.author}</time>
-            </div>
-          </div>
-        </article>
+                <div>
+                  <FiUser />
+                  <time>{post.data.author}</time>
+                </div>
+              </div>
+            </article>
+          </a>
+        </Link>
       ))}
     </main>
   );
